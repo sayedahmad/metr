@@ -4,8 +4,7 @@ from io import StringIO
 import csv
 
 
-from ..models import Measurement
-from ..serializers import MeasurementSearializer
+from ..models import Measurement, MeasurementType
 
 
 @pytest.fixture(scope="function")
@@ -19,6 +18,7 @@ def measurement_valid(device_valid):
             newest_value=29690,
             due_date_value=16274,
             due_date="2019-09-30T00:00:00.000000",
+            status = MeasurementType.MEASUREMENT,
             created_at=datetime.datetime.now(),
         )
         measurements.append(measurement)

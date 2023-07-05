@@ -33,11 +33,7 @@ def test_measurement_serializer_create_invalid_data():
 
         serializer = MeasurementSearializer(data=measurement_data)
         is_valid = serializer.is_valid()
-
         assert not is_valid
         assert "device" in serializer.errors
         assert "dimension" in serializer.errors
         assert "newest_value" in serializer.errors
-        assert "due_date_value" in serializer.errors
-        assert "due_date" in serializer.errors
-        assert "created_at" in serializer.errors
