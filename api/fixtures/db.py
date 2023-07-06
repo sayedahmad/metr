@@ -27,7 +27,12 @@ def db_session(
             serialized_rollback,
         ) = validate_django_db(marker)
     else:
-        (transactional, reset_sequences, databases, serialized_rollback,) = (
+        (
+            transactional,
+            reset_sequences,
+            databases,
+            serialized_rollback,
+        ) = (
             False,
             False,
             None,
@@ -35,8 +40,12 @@ def db_session(
         )
 
     transactional = True
-    reset_sequences = reset_sequences or ("django_db_reset_sequences" in request.fixturenames)
-    serialized_rollback = serialized_rollback or ("django_db_serialized_rollback" in request.fixturenames)
+    reset_sequences = reset_sequences or (
+        "django_db_reset_sequences" in request.fixturenames
+    )
+    serialized_rollback = serialized_rollback or (
+        "django_db_serialized_rollback" in request.fixturenames
+    )
 
     django_db_blocker.unblock()
     request.addfinalizer(django_db_blocker.restore)

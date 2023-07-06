@@ -28,7 +28,7 @@ class DataView(generics.CreateAPIView):
                 "access_number": device_data.get("accessnr"),
                 "manufacturer": device_data.get("manufacturer"),
             }
-            
+
             measurement = {
                 "device": device,
                 "dimension": measurement_data[1].get("dimension"),
@@ -39,7 +39,7 @@ class DataView(generics.CreateAPIView):
                 measurement["status"] = MeasurementType.ERROR
             else:
                 measurement["due_date"] = measurement_data[2].get("value")
-                measurement["status"] = MeasurementType.MEASUREMENT 
+                measurement["status"] = MeasurementType.MEASUREMENT
 
             serializer = self.get_serializer(data=measurement)
             serializer.is_valid(raise_exception=True)
@@ -53,7 +53,6 @@ class DataView(generics.CreateAPIView):
         except ValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        
 
 class DataCSVView(generics.ListAPIView):
     queryset = Measurement.objects.all()

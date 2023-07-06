@@ -5,9 +5,11 @@ from django.db import models
 # class DeviceManufacturer(models.Model):
 #     name = models.CharField(max_length=100)
 
+
 class MeasurementType(models.IntegerChoices):
     MEASUREMENT = 1
     ERROR = 2
+
 
 class Device(models.Model):
     device_id = models.BigIntegerField(blank=True, null=True)
