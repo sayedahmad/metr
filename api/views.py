@@ -46,12 +46,12 @@ class DataView(generics.CreateAPIView):
             self.perform_create(serializer)
 
             return Response(
-                {"message": "Measurement created successfully"},
+                {"HTTP 201 Created ": "Message received successfully"},
                 status=status.HTTP_201_CREATED,
             )
 
         except ValidationError as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"HTTP 400 Bad Request ": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DataCSVView(generics.ListAPIView):
