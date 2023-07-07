@@ -7,6 +7,39 @@ The Metr Data CSV Exporter is a Django-based application that allows you to gath
 
 The goal of this challenge is to build two endpoints using Django and Django Rest Framework. The m-gate gateway installed in the buildings sends messages from devices to the first endpoint. The gateway processes the messages and sends them to the backend. The second endpoint allows clients to download a CSV file with the latest message of the current month for each device.
 
+## Directory Structure
+
+The project follows the directory structure outlined below. The backend directory serves as the main project directory, containing the settings files. The api directory represents the Django application, where the primary logic of the project is implemented.
+
+```plaintext
+metr/
+├── backend/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── test_settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── api/
+│   ├── fixtures/
+│   ├── renderers/
+│   ├── migrations/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── conftest.py
+│   ├── models.py
+│   ├── serializers_tests.py
+│   ├── serializers.py
+│   ├── urls.py
+│   ├── views_tests.py
+│   ├── views.py
+├── .gitignore.py
+├── manage.py
+├── pytest.ini
+└── README.md
+├── requirements.txt
+```
 ## Installation and Setup
 
 1. Clone the repository:
@@ -152,4 +185,10 @@ The CSV file contains the following columns:
 - Due date (in a human-readable format)
 - Status
 
- 
+ ## Running Tests
+ The Metr Data CSV Exporter project includes comprehensive unit tests for models, serializers, views, and renderers. These tests ensure the correctness and functionality of the application. To run the tests, follow the instructions below:
+
+
+
+ - ```shell
+   pytest
