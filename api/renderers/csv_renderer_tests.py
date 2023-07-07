@@ -41,6 +41,17 @@ def test_file_name():
 
 @pytest.mark.django_db
 @freeze_time(datetime(2021, 9, 7, 10, 30))
+def test_generate_measurement_csv(measurement_valid, device_valid, csv_sample):
+    measurement = measurement_valid(device_valid)
+    renderer = CSVRenderer()
+    assert (
+        renderer.generate_measurement_csv([MeasurementSearializer(measurement).data])
+        == csv_sample
+    )
+
+
+@pytest.mark.django_db
+@freeze_time(datetime(2021, 9, 7, 10, 30))
 def test_convert_to_datetime():
     renderer = CSVRenderer()
     assert renderer.convert_to_datetime("2021-09-07T10:30:0.000000Z") == datetime.now()
