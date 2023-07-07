@@ -15,7 +15,7 @@ class DataView(generics.CreateAPIView):
     serializer_class = MeasurementSearializer
 
     def post(self, request):
-        if request.data is None or request.data == {}:
+        if not request.data:
             return Response({"Invalid data"}, status=status.HTTP_400_BAD_REQUEST)
         try:
             measurement_data = request.data.get("data")
