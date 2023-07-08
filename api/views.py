@@ -1,11 +1,12 @@
-from rest_framework import generics
-from .models import Measurement, MeasurementType
-from .serializers import MeasurementSearializer
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.exceptions import ValidationError
 from datetime import datetime
+
+from rest_framework import generics, status
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+
+from .models import Measurement, MeasurementType
 from .renderers.csv_renderer import CSVRenderer
+from .serializers import MeasurementSearializer
 
 # Create your views here.
 
@@ -51,7 +52,9 @@ class DataView(generics.CreateAPIView):
             )
 
         except ValidationError as e:
-            return Response({"HTTP 400 Bad Request ": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"HTTP 400 Bad Request ": str(e)}, status=status.HTTP_400_BAD_REQUEST
+            )
 
 
 class DataCSVView(generics.ListAPIView):

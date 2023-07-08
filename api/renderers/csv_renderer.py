@@ -1,7 +1,9 @@
-from rest_framework.renderers import BaseRenderer
 import csv
 import datetime
 from io import StringIO
+
+from rest_framework.renderers import BaseRenderer
+
 from ..models import MeasurementType
 
 
@@ -20,6 +22,8 @@ class CSVRenderer(BaseRenderer):
         "%Y-%m-%d %H:%M:%S",
         "%Y-%m-%dT%H:%M:%S.%f",
         "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%dT%H:%M:%S",
     ]
 
     def render(self, data, media_type=None, renderer_context=None):

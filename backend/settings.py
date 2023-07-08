@@ -112,11 +112,39 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+FORMAT_MODULE_PATH = None
 
-USE_I18N = True
+DATE_FORMAT = "%Y-%m-%d"
 
-USE_TZ = True
+SHORT_DATE_FORMAT = "%Y-%m-%d"
+
+DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
+
+SHORT_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S.%f"
+
+TIME_FORMAT = "%H:%M:%S.%f"
+
+MONTH_DAY_FORMAT = "F j"
+
+YEAR_MONTH_FORMAT = "F Y"
+
+FIRST_DAY_OF_WEEK = 1  # Monday
+
+DECIMAL_SEPARATOR = "."
+
+THOUSAND_SEPARATOR = ","
+
+USE_THOUSAND_SEPARATOR = False
+
+NUMBER_GROUPING = 0
+
+
+USE_I18N = False
+
+
+TIME_ZONE = "UTC"
+
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

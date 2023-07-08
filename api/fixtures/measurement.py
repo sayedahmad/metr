@@ -1,8 +1,8 @@
-import pytest
+import csv
 import datetime
 from io import StringIO
-import csv
 
+import pytest
 
 from ..models import Measurement, MeasurementType
 
@@ -11,20 +11,22 @@ from ..models import Measurement, MeasurementType
 def measurement_valid(device_valid):
     measurements = []
 
-    def _make_protocol(device_valid):
+    def _create_measurement(device=None, created_date=datetime.datetime.now()):
+        if callable(device):
+            device = device()
         measurement = Measurement.objects.create(
-            device=device_valid(),
+            device=device,
             dimension="Energy (kWh)",
             newest_value=29690,
             due_date_value=16274,
             due_date="2019-09-30T00:00:00.000000",
             status=MeasurementType.MEASUREMENT,
-            created_at=datetime.datetime.now(),
+            created_at=created_date,
         )
         measurements.append(measurement)
         return measurement
 
-    yield _make_protocol
+    yield _create_measurement
     for measurement in measurements:
         measurement.delete()
 
@@ -64,47 +66,3 @@ def csv_sample():
     csv_content = csv_buffer.getvalue()
     csv_buffer.close()
     return csv_content
-
-
-@pytest.fixture(scope="function")
-def measurement_post_data():
-    return {
-        "device": {
-            "identnr": 123456,
-            "type": 1,
-            "status": 0,
-            "version": 1,
-            "accessnr": 99,
-            "manufacturer": 9876,
-        },
-        "data": [
-            {
-                "value": "2020-06-26T06:49:00.000000",
-                "tariff": 0,
-                "subunit": 0,
-                "dimension": "Time Point (time & date)",
-                "storagenr": 0,
-            },
-            {
-                "value": 29690,
-                "tariff": 0,
-                "subunit": 0,
-                "dimension": "Energy (kWh)",
-                "storagenr": 0,
-            },
-            {
-                "value": "2019-09-30T00:00:00.000000",
-                "tariff": 0,
-                "subunit": 0,
-                "dimension": "Time Point (date)",
-                "storagenr": 1,
-            },
-            {
-                "value": 16274,
-                "tariff": 0,
-                "subunit": 0,
-                "dimension": "Energy (kWh)",
-                "storagenr": 1,
-            },
-        ],
-    }

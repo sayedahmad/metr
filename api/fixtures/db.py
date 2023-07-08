@@ -1,8 +1,6 @@
 import pytest
-from pytest_django.fixtures import (  # type: ignore
-    is_django_unittest,
-    validate_django_db,
-)
+from pytest_django.fixtures import is_django_unittest  # type: ignore
+from pytest_django.fixtures import validate_django_db
 
 
 # Copied over from pytest_django.fixtures._django_db_helper so we can adjust

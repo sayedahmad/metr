@@ -1,5 +1,6 @@
-from django.urls import path, include
-from .views import DataView, DataCSVView
+from django.urls import path
+
+from .views import DataCSVView, DataView
 
 urlpatterns = [
     path("data/", DataView.as_view(), name="data-view"),
