@@ -1,4 +1,5 @@
 import pytest
+
 from ..models import Device
 
 
@@ -6,9 +7,9 @@ from ..models import Device
 def device_valid():
     devices = []
 
-    def _make_protocol():
+    def _make_protocol(device_id=83251076):
         device = Device.objects.create(
-            device_id=83251076,
+            device_id=device_id,
             device_type=4,
             status=0,
             version=0,

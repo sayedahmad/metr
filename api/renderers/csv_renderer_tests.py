@@ -1,16 +1,18 @@
-from api.renderers.csv_renderer import CSVRenderer
-from types import SimpleNamespace
 import io
-import pytest
-from api.serializers import MeasurementSearializer
-from freezegun import freeze_time
 from datetime import datetime
+from types import SimpleNamespace
+
+import pytest
+from freezegun import freeze_time
+
+from api.renderers.csv_renderer import CSVRenderer
+from api.serializers import MeasurementSearializer
 
 
 @pytest.mark.django_db
 @freeze_time(datetime(2021, 9, 7, 10, 30))
 def test_csv_renderer(measurement_valid, device_valid, csv_sample):
-    measurement = measurement_valid(device_valid)
+    measurement = measurement_valid(device_valid, created_date=datetime.now())
     renderer = CSVRenderer()
     view = SimpleNamespace(
         request={},
@@ -42,7 +44,7 @@ def test_file_name():
 @pytest.mark.django_db
 @freeze_time(datetime(2021, 9, 7, 10, 30))
 def test_generate_measurement_csv(measurement_valid, device_valid, csv_sample):
-    measurement = measurement_valid(device_valid)
+    measurement = measurement_valid(device_valid, created_date=datetime.now())
     renderer = CSVRenderer()
     assert (
         renderer.generate_measurement_csv([MeasurementSearializer(measurement).data])

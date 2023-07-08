@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -29,4 +30,9 @@ class Measurement(models.Model):
     due_date_value = models.IntegerField(null=True, blank=True)
     due_date = models.DateTimeField(null=True, blank=True)
     status = models.IntegerField(choices=MeasurementType.choices)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.created_at is None:
+            self.created_at = timezone.now()
+        super().save(*args, **kwargs)
