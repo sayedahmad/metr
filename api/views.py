@@ -36,7 +36,7 @@ class DataView(generics.CreateAPIView):
                 "newest_value": measurement_data[1].get("value"),
                 "due_date_value": measurement_data[3].get("value"),
             }
-            if "Error flags" in measurement_data[2].get("dimension"):
+            if "Error flags" in measurement_data[2].get("dimension") or "Error flags" in measurement_data[3].get("dimension"):
                 measurement["status"] = MeasurementType.ERROR
             else:
                 measurement["due_date"] = measurement_data[2].get("value")
